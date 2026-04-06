@@ -568,6 +568,66 @@ export const heaterProducts: Product[] = [
       "Printing industry"
     ],
     relatedProducts: ["strip-heaters", "ceramic-band-heaters"]
+  },
+  {
+    id: "air-heaters",
+    name: "Air Heaters",
+    image: "/images/AIR HEATERS.JPG",
+    heroImage: "/images/AIR HEATERS.JPG",
+    description: "High performance air heaters designed for rapid and efficient heating of air streams in industrial applications.",
+    features: [
+      "Rapid heat transfer",
+      "High temperature capability",
+      "Durable construction"
+    ],
+    specifications: [
+      { label: "Voltage", value: "Custom" },
+      { label: "Material", value: "Stainless Steel" }
+    ],
+    applications: ["Drying processes", "Air curtains", "Heat shrink applications"],
+    relatedProducts: ["tubular-heaters"]
+  },
+  {
+    id: "bundle-heaters",
+    name: "Bundle Heaters",
+    image: "/images/BUNDLE HEATERS.JPG",
+    heroImage: "/images/BUNDLE HEATERS.JPG",
+    description: "Specialized bundle heaters manufactured for intensive heavy-duty direct fluid heating inside tanks and vessels.",
+    features: ["High watt density", "Large surface area", "Corrosion resistant options"],
+    specifications: [
+      { label: "Voltage", value: "Up to 600V" },
+      { label: "Material", value: "SS / Incoloy" }
+    ],
+    applications: ["Tank heating", "Chemical processing", "Oil heating"],
+    relatedProducts: ["immersion-heaters"]
+  },
+  {
+    id: "pipe-heaters",
+    name: "Pipe Type Heaters",
+    image: "/images/PIPE TYPE HEATERS.JPG",
+    heroImage: "/images/PIPE TYPE HEATERS.JPG",
+    description: "Robust pipe type heaters designed for external induction and direct heating of industrial pipelines.",
+    features: ["Uniform heat distribution", "Easy installation", "Long service life"],
+    specifications: [
+      { label: "Voltage", value: "220V - 415V" },
+      { label: "Type", value: "Clamp-on / Insert" }
+    ],
+    applications: ["Pipeline tracing", "Viscosity control", "Freeze protection"],
+    relatedProducts: ["tubular-heaters"]
+  },
+  {
+    id: "silicon-carbide-rods",
+    name: "Silicon Carbide Rods",
+    image: "/images/SILICON CARBIDE ROD.JPG",
+    heroImage: "/images/SILICON CARBIDE ROD.JPG",
+    description: "Advanced non-metallic, high-temperature silicon carbide (SiC) heating elements suitable for extreme environments.",
+    features: ["Extreme high temperature limit", "Low aging rate", "Excellent thermal shock resistance"],
+    specifications: [
+      { label: "Temperature", value: "Up to 1600°C" },
+      { label: "Material", value: "Silicon Carbide" }
+    ],
+    applications: ["High-temp furnaces", "Glass melting", "Powder metallurgy"],
+    relatedProducts: ["furnaces", "d-type-heaters"]
   }
 ];
 
@@ -783,6 +843,76 @@ export const heatingEquipmentProducts: Product[] = [
       "Melting furnaces"
     ],
     relatedProducts: ["furnaces", "tubular-heaters"]
+  },
+  {
+    id: "tray-dryer",
+    name: "Tray Dryers",
+    image: "/images/TRAY DRYER.JPG",
+    heroImage: "/images/TRAY DRYER.JPG",
+    description: "Industrial tray dryers engineered to provide uniform drying and systematic heating sequences for bulk materials.",
+    features: ["Multi-tray capacity", "Even air circulation", "Digital temperature control"],
+    specifications: [
+      { label: "Material", value: "Stainless Steel" },
+      { label: "Capacity", value: "Custom Trays" }
+    ],
+    applications: ["Food processing", "Pharmaceuticals", "Chemicals"],
+    relatedProducts: ["industrial-ovens"]
+  },
+  {
+    id: "heating-mirror",
+    name: "Heating Mirrors",
+    image: "/images/HEATING MIRROR.JPG",
+    heroImage: "/images/HEATING MIRROR.JPG",
+    description: "Precision heating mirrors used for critical joining, welding, and surface activation of plastic components.",
+    features: ["Precise temperature regulation", "Teflon coated surfaces", "Rapid heat up"],
+    specifications: [
+      { label: "Temperature", value: "Up to 300°C" },
+      { label: "Surface", value: "PTFE Coated" }
+    ],
+    applications: ["Plastic welding", "Pipe joining", "Fabrication"],
+    relatedProducts: ["soldering-gun"]
+  },
+  {
+    id: "tinning-pot",
+    name: "Tinning Pots",
+    image: "/images/TINNING POT.JPG",
+    heroImage: "/images/TINNING POT.JPG",
+    description: "Heavy-duty electric tinning pots designed for dip soldering, wire tinning, and melting of low-temperature alloys.",
+    features: ["Cast iron crucible", "Thermostatic control", "High insulation properties"],
+    specifications: [
+      { label: "Crucible", value: "Cast Iron" },
+      { label: "Temperature", value: "Up to 400°C" }
+    ],
+    applications: ["PCB soldering", "Wire tinning", "Component dipping"],
+    relatedProducts: ["soldering-gun"]
+  },
+  {
+    id: "sealing-machine",
+    name: "Sealing Machines",
+    image: "/images/SEALING MACHINE.JPG",
+    heroImage: "/images/SEALING MACHINE.JPG",
+    description: "Reliable industrial heat sealing machines that ensure strong and consistent seals for packaging applications.",
+    features: ["Adjustable sealing time", "Consistent heat delivery", "Heavy-duty operations"],
+    specifications: [
+      { label: "Seal Width", value: "Adjustable" },
+      { label: "Operation", value: "Manual / Pneumatic" }
+    ],
+    applications: ["Packaging", "Plastic sealing", "Food packing"],
+    relatedProducts: ["industrial-ovens"]
+  },
+  {
+    id: "soldering-gun",
+    name: "Hot Air & Soldering Guns",
+    image: "/images/HOT AIR GUN - SOLDERING GUN.JPG",
+    heroImage: "/images/HOT AIR GUN - SOLDERING GUN.JPG",
+    description: "Professional-grade hot air tools and soldering guns for precise localized heating and electronic assembly.",
+    features: ["Ergonomic design", "Variable temperature control", "Multiple nozzle attachments"],
+    specifications: [
+      { label: "Power", value: "Up to 2000W" },
+      { label: "Temperature", value: "Adjustable" }
+    ],
+    applications: ["Electronics repair", "Heat shrinking", "Plastic welding"],
+    relatedProducts: ["tinning-pot"]
   }
 ];
 
@@ -904,6 +1034,34 @@ export const accessoriesProducts: Product[] = [
       "Furnace wiring"
     ],
     relatedProducts: ["terminal-boxes", "ceramic-connectors"]
+  },
+  {
+    id: "teflon-tape",
+    name: "Teflon Tapes",
+    image: "/images/TEFLON TAPE.JPG",
+    heroImage: "/images/TEFLON TAPE.JPG",
+    description: "High-grade PTFE Teflon tapes providing excellent heat resistance and insulation for demanding heating applications.",
+    features: ["High temperature resistance", "Non-stick surface", "Chemically inert"],
+    specifications: [
+      { label: "Material", value: "PTFE" },
+      { label: "Width", value: "Various sizes" }
+    ],
+    applications: ["Insulation", "Sealing", "Wire wrapping"],
+    relatedProducts: ["ceramic-connectors"]
+  },
+  {
+    id: "thermostat",
+    name: "Thermostats",
+    image: "/images/THERMOSTAT.JPG",
+    heroImage: "/images/THERMOSTAT.JPG",
+    description: "Precision electromechanical and digital thermostats for accurate temperature regulation in heating systems.",
+    features: ["High accuracy", "Durable contacts", "Easy calibration"],
+    specifications: [
+      { label: "Type", value: "Capillary / Bimetal / Digital" },
+      { label: "Range", value: "Customizable" }
+    ],
+    applications: ["Ovens", "Space heaters", "Water heaters"],
+    relatedProducts: ["terminal-boxes"]
   }
 ];
 
@@ -932,7 +1090,7 @@ export const categories: Category[] = [
         heroImage: "/images/tubular-heaters-subcategory.jpg",
         description: "Tubular and immersion heaters for direct heating of liquids, gases, and surface applications.",
         products: heaterProducts.filter(p => 
-          ["tubular-heaters", "immersion-heaters"].includes(p.id)
+          ["tubular-heaters", "immersion-heaters", "pipe-heaters"].includes(p.id)
         )
       },
       {
@@ -952,7 +1110,7 @@ export const categories: Category[] = [
         heroImage: "/images/specialty-heaters-subcategory.jpg",
         description: "Specialized heaters for corrosive environments, high purity, and unique applications.",
         products: heaterProducts.filter(p => 
-          ["titanium-heaters", "porcelain-heaters", "silica-glass-heaters", "d-type-heaters"].includes(p.id)
+          ["titanium-heaters", "porcelain-heaters", "silica-glass-heaters", "d-type-heaters", "bundle-heaters"].includes(p.id)
         )
       },
       {
@@ -962,7 +1120,7 @@ export const categories: Category[] = [
         heroImage: "/images/industrial-heaters-subcategory.jpg",
         description: "Heavy-duty industrial heaters for various manufacturing processes.",
         products: heaterProducts.filter(p => 
-          ["infrared-heaters", "casting-heaters", "strip-heaters", "manifold-heaters", "space-heaters", "induction-heating-coil", "corrugation-heaters"].includes(p.id)
+          ["infrared-heaters", "casting-heaters", "strip-heaters", "manifold-heaters", "space-heaters", "induction-heating-coil", "corrugation-heaters", "air-heaters", "silicon-carbide-rods"].includes(p.id)
         )
       }
     ]
@@ -996,7 +1154,7 @@ export const categories: Category[] = [
         heroImage: "/images/ovens-furnaces-subcategory.jpg",
         description: "Custom designed industrial ovens, tray dryers, and furnaces for various heating applications.",
         products: heatingEquipmentProducts.filter(p => 
-          ["industrial-ovens", "furnaces"].includes(p.id)
+          ["industrial-ovens", "furnaces", "tray-dryer", "heating-mirror", "sealing-machine"].includes(p.id)
         )
       },
       {
@@ -1006,7 +1164,7 @@ export const categories: Category[] = [
         heroImage: "/images/mantles-coils-subcategory.jpg",
         description: "Heating mantles for laboratory use and furnace coils for industrial applications.",
         products: heatingEquipmentProducts.filter(p => 
-          ["heating-mantles", "furnace-coils"].includes(p.id)
+          ["heating-mantles", "furnace-coils", "tinning-pot", "soldering-gun"].includes(p.id)
         )
       }
     ]
