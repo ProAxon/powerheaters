@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.log
+
+# Editor/OS
+.DS_Store
+.vscode/
+.idea/
+
+# Env
+.env
+.env.local
+.env.*
