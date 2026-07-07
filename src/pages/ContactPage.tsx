@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useSearchParams } from 'react-router-dom';
 import { 
   MapPin, 
   Phone, 
@@ -16,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { CONTACT } from '@/lib/constants';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -24,7 +24,6 @@ const fadeInUp = {
 };
 
 export default function ContactPage() {
-  const [searchParams] = useSearchParams();
   const [showQuoteModal, setShowQuoteModal] = useState(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
   const [quoteFormData, setQuoteFormData] = useState({
@@ -36,12 +35,11 @@ export default function ContactPage() {
     specifications: ''
   });
 
-  // Show quote modal if ?quote=true is in URL
+  // Show enquiry popup on Contact page visit
   useEffect(() => {
-    if (searchParams.get('quote') === 'true') {
-      setShowQuoteModal(true);
-    }
-  }, [searchParams]);
+    const timer = setTimeout(() => setShowQuoteModal(true), 600);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleQuoteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -56,7 +54,7 @@ Product: ${quoteFormData.product}
 Specifications:
 ${quoteFormData.specifications}
     `;
-    window.location.href = `mailto:info@powerheaters.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setQuoteSubmitted(true);
     setTimeout(() => {
       setShowQuoteModal(false);
@@ -200,7 +198,7 @@ ${quoteFormData.specifications}
                     </Button>
                     
                     <p className="text-xs text-gray-500 text-center">
-                      Your request will be sent to: info@powerheaters.com
+                      Your request will be sent to: {CONTACT.email}
                     </p>
                   </form>
                 )}
@@ -258,22 +256,22 @@ ${quoteFormData.specifications}
               { 
                 icon: MapPin, 
                 title: 'Address', 
-                content: 'Power Heaters Private Limited\nK 16/8, N 9, Jalgaon Road, Pawan Nagar, Hudoc\nChhatrapati Sambhajinagar-431001, Maharashtra, India' 
+                content: `${CONTACT.address.company}\n${CONTACT.address.works}` 
               },
               { 
                 icon: Phone, 
                 title: 'Phone', 
-                content: '07942558620\n+91-11-1234-5678' 
+                content: `${CONTACT.primaryContact}: ${CONTACT.primaryPhoneDisplay}\n${CONTACT.secondaryContact}: +91 ${CONTACT.secondaryPhone}\nOffice: +91 ${CONTACT.officePhone}` 
               },
               { 
                 icon: Mail, 
                 title: 'Email', 
-                content: 'info@powerheaters.com' 
+                content: `${CONTACT.email}\n${CONTACT.emailAlt}` 
               },
               { 
                 icon: Clock, 
                 title: 'Working Hours', 
-                content: 'Monday - Saturday\n9:00 AM - 6:00 PM' 
+                content: CONTACT.workingHours
               }
             ].map((item, index) => (
               <motion.div
@@ -321,7 +319,7 @@ ${quoteFormData.specifications}
                   const message = formData.get('message') as string;
                   const subject = `Contact Form - ${name}`;
                   const body = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`;
-                  window.location.href = `mailto:info@powerheaters.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                  window.location.href = `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 }}
               >
                 <div className="grid md:grid-cols-2 gap-6">
@@ -409,13 +407,18 @@ ${quoteFormData.specifications}
               transition={{ duration: 0.6 }}
               className="space-y-8"
             >
-              {/* Map Placeholder */}
-              <div className="bg-gray-100 rounded-xl overflow-hidden h-[350px] flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-12 h-12 text-red-600 mx-auto mb-4" />
-                  <p className="text-gray-600">Interactive Map</p>
-                  <p className="text-gray-500 text-sm">Chhatrapati Sambhajinagar, Maharashtra</p>
-                </div>
+              {/* Google Map */}
+              <div className="rounded-xl overflow-hidden h-[350px] border border-gray-200">
+                <iframe
+                  title="Power Heaters Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3752.1987654321!2d75.2134!3d19.8761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3c47e9e8b8b8b8b9%3A0x0!2sMIDC%20Waluj%2C%20Chhatrapati%20Sambhajinagar!5e0!3m2!1sen!2sin!4v1"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
               
               {/* Quick Contact Info */}
@@ -428,8 +431,8 @@ ${quoteFormData.specifications}
                     <Phone className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
                     <div>
                       <p className="font-medium text-gray-900">WhatsApp / Call</p>
-                      <a href="https://wa.me/917942558620" className="text-red-600 hover:underline">
-                        07942558620
+                      <a href={`https://wa.me/${CONTACT.whatsapp}`} className="text-red-600 hover:underline">
+                        {CONTACT.primaryPhoneDisplay}
                       </a>
                     </div>
                   </div>
@@ -437,7 +440,7 @@ ${quoteFormData.specifications}
                     <MessageCircle className="w-5 h-5 text-green-600 mr-3 mt-0.5" />
                     <div>
                       <p className="font-medium text-gray-900">WhatsApp Business</p>
-                      <a href="https://wa.me/917942558620" target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">
+                      <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:underline">
                         Chat on WhatsApp
                       </a>
                     </div>
@@ -446,8 +449,8 @@ ${quoteFormData.specifications}
                     <Mail className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
                     <div>
                       <p className="font-medium text-gray-900">Email Us</p>
-                      <a href="mailto:info@powerheaters.com" className="text-red-600 hover:underline">
-                        info@powerheaters.com
+                      <a href={`mailto:${CONTACT.email}`} className="text-red-600 hover:underline">
+                        {CONTACT.email}
                       </a>
                     </div>
                   </div>
@@ -537,14 +540,14 @@ ${quoteFormData.specifications}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="tel:+917942558620"
+                href={`tel:+91${CONTACT.primaryPhone}`}
                 className="inline-flex items-center justify-center px-8 py-4 bg-white text-red-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Call Now
               </a>
               <a 
-                href="https://wa.me/917942558620"
+                href={`https://wa.me/${CONTACT.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-8 py-4 bg-green-500 text-white font-medium rounded-lg hover:bg-green-600 transition-colors"

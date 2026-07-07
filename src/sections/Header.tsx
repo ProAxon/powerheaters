@@ -1,386 +1,207 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Menu, 
-  X, 
-  ChevronDown, 
-  Flame, 
-  Thermometer, 
-  Factory,
-  Settings,
+import {
+  Menu,
+  X,
+  ChevronDown,
   ArrowRight,
-  Phone
+  Search,
+  Mail,
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { categories } from '@/data/products';
+import SearchDialog from '@/components/SearchDialog';
 
-const categoryIcons: Record<string, React.ElementType> = {
-  heaters: Flame,
-  thermocouples: Thermometer,
-  'heating-equipment': Factory,
-  accessories: Settings
-};
+const navLinks = [
+  { path: '/about', label: 'About Us' },
+  { path: '/blog', label: 'Knowledge Hub' },
+  { path: '/downloads', label: 'Downloads' },
+];
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
   }, [location.pathname]);
 
-  const isActive = (path: string) => {
-    if (path === '/') return location.pathname === '/';
-    return location.pathname.startsWith(path);
-  };
+  const isActive = (path: string) => location.pathname.startsWith(path);
+
+  const navClass = (path: string) =>
+    `kanthal-nav transition-colors hover:text-gray-900 ${
+      isActive(path) ? 'kanthal-nav-active' : ''
+    }`;
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white shadow-lg' 
-          : 'bg-gradient-to-b from-black/70 to-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <span className={`text-2xl font-bold transition-colors ${
-              isScrolled ? 'text-gray-900' : 'text-white'
-            }`}>
-              POWER
-            </span>
-            <span className={`ml-1 text-sm font-medium transition-colors ${
-              isScrolled ? 'text-red-600' : 'text-red-400'
-            }`}>
-              HEATERS
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
-            <Link 
-              to="/" 
-              className={`text-sm font-medium transition-colors hover:text-red-600 ${
-                isActive('/') && !isActive('/products') && !isActive('/about') && !isActive('/contact')
-                  ? 'text-red-600' 
-                  : isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-            >
-              Home
+    <>
+      <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
+        <div className="container mx-auto px-6 lg:px-12">
+          <div className="flex items-center h-[64px]">
+            {/* Logo — Kanthal style: bold red uppercase */}
+            <Link to="/" className="flex-shrink-0 mr-8">
+              <span
+                className="text-xl font-bold uppercase tracking-tight"
+                style={{ color: 'var(--brand-red)' }}
+              >
+                Power Heaters
+              </span>
             </Link>
 
-            {/* Products Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('products')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button 
-                className={`flex items-center text-sm font-medium transition-colors hover:text-red-600 ${
-                  isActive('/products') 
-                    ? 'text-red-600' 
-                    : isScrolled ? 'text-gray-700' : 'text-white'
-                }`}
+            {/* Centered nav */}
+            <nav className="hidden lg:flex flex-1 items-center justify-center gap-10">
+              {/* Products dropdown — "FIND PRODUCTS BY" */}
+              <div
+                className="relative"
+                onMouseEnter={() => setActiveDropdown('products')}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                Products
-                <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${
-                  activeDropdown === 'products' ? 'rotate-180' : ''
-                }`} />
-              </button>
+                <button
+                  className={`flex items-center kanthal-nav transition-colors hover:text-gray-900 ${
+                    isActive('/products') ? 'kanthal-nav-active' : ''
+                  }`}
+                >
+                  Find Products By
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 ml-1.5 transition-transform ${
+                      activeDropdown === 'products' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
 
-              <AnimatePresence>
-                {activeDropdown === 'products' && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.2 }}
-                    className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
-                  >
-                    <div className="bg-white rounded-xl shadow-xl p-6 min-w-[800px]">
-                      <div className="grid grid-cols-2 gap-6">
-                        {categories.map((category) => {
-                          const IconComponent = categoryIcons[category.id] || ArrowRight;
-                          return (
+                <AnimatePresence>
+                  {activeDropdown === 'products' && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-1/2 -translate-x-1/2 pt-2"
+                    >
+                      <div className="bg-white shadow-xl border border-gray-100 p-8 min-w-[680px]">
+                        <div className="grid grid-cols-2 gap-x-10 gap-y-6">
+                          {categories.map((category) => (
                             <div key={category.id}>
-                              <Link 
+                              <Link
                                 to={`/products/${category.id}`}
-                                className="flex items-center mb-4 group"
+                                className="font-bold text-sm uppercase tracking-wide mb-3 block hover:underline"
+                                style={{ color: 'var(--brand-red)' }}
                               >
-                                <div className="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center mr-3 group-hover:bg-red-100 transition-colors">
-                                  <IconComponent className="w-5 h-5 text-red-600" />
-                                </div>
-                                <div>
-                                  <div className="font-semibold text-gray-900 group-hover:text-red-600 transition-colors">
-                                    {category.name}
-                                  </div>
-                                  <div className="text-xs text-gray-500">
-                                    {category.subcategories.length} subcategories
-                                  </div>
-                                </div>
+                                {category.name}
                               </Link>
-                              <ul className="space-y-2 pl-13">
+                              <ul className="space-y-1.5">
                                 {category.subcategories.map((sub) => (
                                   <li key={sub.id}>
-                                    <Link 
+                                    <Link
                                       to={`/products/${category.id}/${sub.id}`}
-                                      className="text-sm text-gray-600 hover:text-red-600 transition-colors flex items-center group"
+                                      className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
                                     >
-                                      <span className="w-1.5 h-1.5 rounded-full bg-gray-300 mr-2 group-hover:bg-red-600 transition-colors" />
                                       {sub.name}
                                     </Link>
                                   </li>
                                 ))}
                               </ul>
                             </div>
-                          );
-                        })}
+                          ))}
+                        </div>
+                        <div className="mt-6 pt-5 border-t border-gray-100">
+                          <Link
+                            to="/products"
+                            className="flex items-center justify-center text-xs font-bold uppercase tracking-widest hover:underline"
+                            style={{ color: 'var(--brand-red)' }}
+                          >
+                            View All Products
+                            <ArrowRight className="w-3.5 h-3.5 ml-2" />
+                          </Link>
+                        </div>
                       </div>
-                      <div className="mt-6 pt-4 border-t border-gray-100">
-                        <Link 
-                          to="/products"
-                          className="flex items-center justify-center text-sm text-red-600 hover:text-red-700 font-medium"
-                        >
-                          View All Products
-                          <ArrowRight className="w-4 h-4 ml-1" />
-                        </Link>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              {navLinks.map((link) => (
+                <Link key={link.path} to={link.path} className={navClass(link.path)}>
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Right utilities */}
+            <div className="flex items-center gap-5 ml-auto">
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="text-gray-600 hover:text-gray-900 transition-colors p-1"
+                aria-label="Search"
+              >
+                <Search className="w-[18px] h-[18px]" strokeWidth={2} />
+              </button>
+
+              <Link
+                to="/contact"
+                className={`hidden sm:inline-flex items-center gap-2 kanthal-nav transition-colors hover:text-gray-900 ${
+                  isActive('/contact') ? 'kanthal-nav-active' : ''
+                }`}
+              >
+                <Mail className="w-3.5 h-3.5" />
+                Contact us
+              </Link>
+
+              <button
+                className="lg:hidden p-1 text-gray-700"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
             </div>
-
-            <Link 
-              to="/about" 
-              className={`text-sm font-medium transition-colors hover:text-red-600 ${
-                isActive('/about') 
-                  ? 'text-red-600' 
-                  : isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-            >
-              About
-            </Link>
-            <Link 
-              to="/blog" 
-              className={`text-sm font-medium transition-colors hover:text-red-600 ${
-                isActive('/blog') 
-                  ? 'text-red-600' 
-                  : isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-            >
-              Blog
-            </Link>
-            <Link 
-              to="/downloads" 
-              className={`text-sm font-medium transition-colors hover:text-red-600 ${
-                isActive('/downloads') 
-                  ? 'text-red-600' 
-                  : isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-            >
-              Downloads
-            </Link>
-            <Link 
-              to="/ohms-law" 
-              className={`text-sm font-medium transition-colors hover:text-red-600 ${
-                isActive('/ohms-law') 
-                  ? 'text-red-600' 
-                  : isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-            >
-              Tools
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`text-sm font-medium transition-colors hover:text-red-600 ${
-                isActive('/contact') 
-                  ? 'text-red-600' 
-                  : isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
-            >
-              Contact
-            </Link>
-          </nav>
-
-          {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Button 
-              size="sm"
-              variant="outline"
-              className={`transition-all border-2 ${
-                isScrolled 
-                  ? 'border-red-600 text-red-600 bg-transparent hover:bg-red-50' 
-                  : 'border-transparent bg-white/90 text-gray-900 hover:bg-white'
-              }`}
-              asChild
-            >
-              <a href="tel:+917942558620">
-                <Phone className="w-4 h-4 mr-1" />
-                Call Now
-              </a>
-            </Button>
-            <Button 
-              size="sm"
-              variant="outline"
-              className={`transition-all border-2 ${
-                isScrolled 
-                  ? 'border-red-600 text-red-600 bg-transparent hover:bg-red-50' 
-                  : 'border-transparent bg-white/90 text-gray-900 hover:bg-white'
-              }`}
-              asChild
-            >
-              <Link to="/contact?quote=true">Get Quote</Link>
-            </Button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="lg:hidden p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
-            ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
-            )}
-          </button>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
-          >
-            <div className="container mx-auto px-4 py-6">
-              <nav className="space-y-4">
-                <Link 
-                  to="/" 
-                  className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+            >
+              <div className="container mx-auto px-6 py-5 space-y-1">
+                <Link
+                  to="/products"
+                  className={`block py-3 kanthal-nav ${isActive('/products') ? 'kanthal-nav-active' : ''}`}
                 >
-                  Home
+                  Find Products By
                 </Link>
-                
-                {/* Mobile Products Menu */}
-                <div>
-                  <button 
-                    onClick={() => setActiveDropdown(activeDropdown === 'mobile-products' ? null : 'mobile-products')}
-                    className="flex items-center justify-between w-full text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className={`block py-3 kanthal-nav ${isActive(link.path) ? 'kanthal-nav-active' : ''}`}
                   >
-                    Products
-                    <ChevronDown className={`w-5 h-5 transition-transform ${
-                      activeDropdown === 'mobile-products' ? 'rotate-180' : ''
-                    }`} />
-                  </button>
-                  <AnimatePresence>
-                    {activeDropdown === 'mobile-products' && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="mt-4 ml-4 space-y-4 overflow-hidden"
-                      >
-                        {categories.map((category) => (
-                          <div key={category.id}>
-                            <Link 
-                              to={`/products/${category.id}`}
-                              className="block font-medium text-gray-800 hover:text-red-600 transition-colors"
-                            >
-                              {category.name}
-                            </Link>
-                            <ul className="mt-2 ml-4 space-y-2">
-                              {category.subcategories.map((sub) => (
-                                <li key={sub.id}>
-                                  <Link 
-                                    to={`/products/${category.id}/${sub.id}`}
-                                    className="text-sm text-gray-600 hover:text-red-600 transition-colors"
-                                  >
-                                    {sub.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                    {link.label}
+                  </Link>
+                ))}
+                <Link
+                  to="/contact"
+                  className={`flex items-center gap-2 py-3 kanthal-nav ${
+                    isActive('/contact') ? 'kanthal-nav-active' : ''
+                  }`}
+                >
+                  <Mail className="w-3.5 h-3.5" />
+                  Contact us
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
-                <Link 
-                  to="/about" 
-                  className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
-                >
-                  About
-                </Link>
-                <Link 
-                  to="/blog" 
-                  className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
-                >
-                  Blog
-                </Link>
-                <Link 
-                  to="/downloads" 
-                  className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
-                >
-                  Downloads
-                </Link>
-                <Link 
-                  to="/ohms-law" 
-                  className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
-                >
-                  Tools
-                </Link>
-                <Link 
-                  to="/contact" 
-                  className="block text-lg font-medium text-gray-900 hover:text-red-600 transition-colors"
-                >
-                  Contact
-                </Link>
-                <div className="flex gap-3 pt-4">
-                  <Button 
-                    variant="outline"
-                    className="flex-1 border-red-600 text-red-600 hover:bg-red-50 bg-transparent border-2"
-                    asChild
-                  >
-                    <a href="tel:+917942558620">
-                      <Phone className="w-4 h-4 mr-1" />
-                      Call Now
-                    </a>
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="flex-1 border-red-600 text-red-600 hover:bg-red-50 bg-transparent border-2"
-                    asChild
-                  >
-                    <Link to="/contact?quote=true">Get Quote</Link>
-                  </Button>
-                </div>
-              </nav>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+      <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
+    </>
   );
 }

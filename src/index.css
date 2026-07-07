@@ -32,6 +32,14 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Kanthal-inspired brand tokens */
+    --brand-red: #BE1E2D;
+    --brand-red-dark: #9E1825;
+    --brand-navy: #1B2B4B;
+    --brand-navy-hover: #152238;
+    --brand-gray: #4A4A4A;
+    --brand-gray-light: #F5F5F5;
   }
 
   .dark {
@@ -70,6 +78,40 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+}
+
+@layer components {
+  /* Kanthal-style section headings: red, uppercase, tracked */
+  .kanthal-heading {
+    color: var(--brand-red);
+    @apply text-2xl md:text-3xl font-bold uppercase tracking-wide;
+  }
+
+  .kanthal-nav {
+    @apply text-xs font-semibold uppercase tracking-widest;
+    color: var(--brand-gray);
+  }
+
+  .kanthal-nav-active {
+    color: #1a1a1a;
+    @apply font-bold;
+  }
+
+  /* Navy CTA button like Kanthal "READ MORE" */
+  .kanthal-btn {
+    background-color: var(--brand-navy);
+    @apply inline-flex items-center justify-center px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors;
+  }
+  .kanthal-btn:hover {
+    background-color: var(--brand-navy-hover);
+  }
+
+  /* Red vertical accent bar used in hero */
+  .kanthal-accent-bar {
+    background-color: var(--brand-red);
+    @apply w-1 flex-shrink-0 self-stretch;
   }
 }
