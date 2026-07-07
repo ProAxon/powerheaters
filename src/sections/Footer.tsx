@@ -4,9 +4,10 @@ import {
   Mail,
   Phone,
   MapPin,
-  Linkedin,
   Facebook,
   Instagram,
+  Linkedin,
+  Twitter,
   Send,
   CheckCircle,
 } from 'lucide-react';
@@ -188,7 +189,9 @@ export default function Footer() {
             <p className="text-gray-400 text-sm mb-6">{SITE.tagline}</p>
             <div className="flex gap-3">
               <a
-                href="#"
+                href={SOCIAL.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors"
                 aria-label="Facebook"
               >
@@ -204,7 +207,18 @@ export default function Footer() {
                 <Instagram className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href={SOCIAL.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors"
+                aria-label="X (Twitter)"
+              >
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a
+                href={SOCIAL.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors"
                 aria-label="LinkedIn"
               >

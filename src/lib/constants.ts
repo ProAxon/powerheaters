@@ -25,7 +25,10 @@ export const CONTACT = {
 } as const;
 
 export const SOCIAL = {
+  facebook: 'https://www.facebook.com/profile.php?id=61591207233601',
   instagram: 'https://www.instagram.com/powerheaterspvtltd',
+  x: 'https://x.com/powerheaters91',
+  linkedin: 'https://www.linkedin.com/company/power-heaters-private-limited',
 } as const;
 
 export const HERO_SLIDES = [
