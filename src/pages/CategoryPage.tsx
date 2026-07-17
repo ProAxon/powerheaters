@@ -57,7 +57,7 @@ export default function CategoryPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: `url("${categoryData.heroImage}")`,
-            backgroundColor: '#1a1a2e'
+            backgroundColor: '#2b2b2b'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
@@ -116,7 +116,7 @@ export default function CategoryPage() {
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                       style={{ 
                         backgroundImage: `url("${subcategory.heroImage}")`,
-                        backgroundColor: '#1a1a2e'
+                        backgroundColor: '#2b2b2b'
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

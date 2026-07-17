@@ -61,9 +61,9 @@ export default function AboutPage() {
       <section className="relative h-[350px] lg:h-[420px] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/images/about-hero.jpg)', backgroundColor: '#1a1a2e' }}
+          style={{ backgroundImage: 'url(/images/IMMERSION HEATERS.JPG)', backgroundColor: '#2b2b2b' }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
         </div>
         <div className="relative h-full flex items-center justify-center text-center">
           <motion.div
@@ -91,10 +91,10 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="section-heading-red text-3xl font-bold mb-6">Industries We Serve</h2>
-              <div className="rounded-xl overflow-hidden shadow-lg">
+              <div className="rounded-xl overflow-hidden shadow-lg bg-white">
                 <img
-                  src="/images/products-hero.jpg"
-                  alt="Industries served by Power Heaters"
+                  src="/images/MICA BAND HEATER.JPG"
+                  alt="Industrial heaters manufactured by Power Heaters"
                   className="w-full h-auto"
                 />
               </div>
@@ -263,12 +263,12 @@ export default function AboutPage() {
               className="grid grid-cols-2 gap-4"
             >
               <div
-                className="aspect-[4/3] rounded-lg bg-cover bg-center"
-                style={{ backgroundImage: 'url(/images/facility.jpg)' }}
+                className="aspect-[4/3] rounded-lg bg-cover bg-center bg-gray-100"
+                style={{ backgroundImage: 'url(/images/COIL HEATERS.JPG)' }}
               />
               <div
-                className="aspect-[4/3] rounded-lg bg-cover bg-center"
-                style={{ backgroundImage: 'url(/images/about-hero.jpg)' }}
+                className="aspect-[4/3] rounded-lg bg-cover bg-center bg-gray-100"
+                style={{ backgroundImage: 'url(/images/CERAMIC BAND HEATER.JPG)' }}
               />
             </motion.div>
           </div>
@@ -276,16 +276,16 @@ export default function AboutPage() {
       </section>
 
       {/* Manufacturing */}
-      <section className="py-16 lg:py-20 bg-[#1a1a2e]">
+      <section className="py-16 lg:py-20 bg-[var(--brand-gray-dark)]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div
-              className="aspect-[4/3] rounded-xl bg-cover bg-center"
-              style={{ backgroundImage: 'url(/images/facility.jpg)' }}
+              className="aspect-[4/3] rounded-xl bg-cover bg-center bg-neutral-800"
+              style={{ backgroundImage: 'url(/images/MANIFOLD HEATERS.JPG)' }}
             />
             <div>
               <h2 className="text-3xl font-bold text-white mb-6">State-of-the-Art Manufacturing</h2>
-              <p className="text-gray-400 leading-relaxed mb-4">
+              <p className="text-gray-300 leading-relaxed mb-4">
                 Our manufacturing facility at MIDC Waluj is equipped with advanced machinery and technology to produce
                 high-quality heating elements. We use precision winding machines and maintain strict quality control at
                 every stage of production.
@@ -297,10 +297,10 @@ export default function AboutPage() {
                   { icon: Globe, title: 'Global Reach', desc: 'Export Worldwide' },
                   { icon: TrendingUp, title: 'Innovation', desc: 'Latest Technology' },
                 ].map((item) => (
-                  <div key={item.title} className="bg-gray-800/50 rounded-lg p-4 text-center">
-                    <item.icon className="w-7 h-7 text-red-500 mx-auto mb-2" />
+                  <div key={item.title} className="bg-white/5 rounded-lg p-4 text-center">
+                    <item.icon className="w-7 h-7 mx-auto mb-2" style={{ color: 'var(--brand-yellow)' }} />
                     <p className="text-white text-sm font-medium">{item.title}</p>
-                    <p className="text-gray-500 text-xs">{item.desc}</p>
+                    <p className="text-gray-400 text-xs">{item.desc}</p>
                   </div>
                 ))}
               </div>

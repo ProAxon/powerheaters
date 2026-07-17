@@ -20,7 +20,8 @@ export const CONTACT = {
     company: 'Power Heaters Pvt Ltd',
   },
   mapEmbedUrl:
-    'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3752.0!2d75.85!3d19.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDUyJzQ4LjAiTiA3NcKwNTEnMDAuMCJF!5e0!3m2!1sen!2sin!4v1',
+    'https://www.google.com/maps?q=POWER+HEATERS+PVT+LTD&ll=19.8501911,75.2136695&z=16&output=embed',
+  mapLink: 'https://maps.app.goo.gl/GNQd8wqpDnSauxNL9',
   workingHours: 'Monday – Saturday, 9:00 AM – 6:00 PM',
 } as const;
 

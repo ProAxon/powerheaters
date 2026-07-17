@@ -16,6 +16,7 @@ const navLinks = [
   { path: '/about', label: 'About Us' },
   { path: '/blog', label: 'Knowledge Hub' },
   { path: '/downloads', label: 'Downloads' },
+  { path: '/ohms-law', label: "Ohm's Law" },
 ];
 
 export default function Header() {

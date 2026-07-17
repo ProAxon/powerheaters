@@ -88,7 +88,7 @@ export default function BlogPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url(/images/blog-hero.jpg)',
-            backgroundColor: '#1a1a2e'
+            backgroundColor: '#2b2b2b'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
@@ -131,11 +131,11 @@ export default function BlogPage() {
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
                     style={{ 
                       backgroundImage: `url(${post.image})`,
-                      backgroundColor: '#1a1a2e'
+                      backgroundColor: '#2b2b2b'
                     }}
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-red-600 text-white text-xs font-medium rounded-full">
+                    <span className="px-3 py-1 bg-[#BE1E2D] text-white text-xs font-medium rounded-full">
                       {post.category}
                     </span>
                   </div>
@@ -178,39 +178,6 @@ export default function BlogPage() {
                 </div>
               </motion.article>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="py-16 lg:py-20 bg-red-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl mx-auto text-center"
-          >
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Subscribe to Our Newsletter
-            </h2>
-            <p className="text-white/90 mb-8">
-              Stay updated with the latest news, product updates, and technical insights
-            </p>
-            <form className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-6 py-4 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button
-                type="submit"
-                className="px-8 py-4 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
           </motion.div>
         </div>
       </section>

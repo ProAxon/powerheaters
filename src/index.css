@@ -33,12 +33,13 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    /* Kanthal-inspired brand tokens */
+    /* Brand tokens — yellow / grey / white / red scheme */
     --brand-red: #BE1E2D;
     --brand-red-dark: #9E1825;
-    --brand-navy: #1B2B4B;
-    --brand-navy-hover: #152238;
+    --brand-yellow: #F5A623;
+    --brand-yellow-dark: #D98E12;
     --brand-gray: #4A4A4A;
+    --brand-gray-dark: #2B2B2B;
     --brand-gray-light: #F5F5F5;
   }
 
@@ -100,18 +101,24 @@
     @apply font-bold;
   }
 
-  /* Navy CTA button like Kanthal "READ MORE" */
+  /* Primary CTA button — brand red */
   .kanthal-btn {
-    background-color: var(--brand-navy);
+    background-color: var(--brand-red);
     @apply inline-flex items-center justify-center px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-colors;
   }
   .kanthal-btn:hover {
-    background-color: var(--brand-navy-hover);
+    background-color: var(--brand-red-dark);
   }
 
   /* Red vertical accent bar used in hero */
   .kanthal-accent-bar {
     background-color: var(--brand-red);
     @apply w-1 flex-shrink-0 self-stretch;
+  }
+
+  /* Yellow accent bar used on category cards */
+  .kanthal-accent-yellow {
+    background-color: var(--brand-yellow);
+    @apply h-1 w-10;
   }
 }

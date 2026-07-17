@@ -138,7 +138,7 @@ export default function DownloadsPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url(/images/downloads-hero.jpg)',
-            backgroundColor: '#1a1a2e'
+            backgroundColor: '#2b2b2b'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
@@ -252,7 +252,7 @@ export default function DownloadsPage() {
                 href="https://wa.me/917942558620"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 bg-neutral-900 text-white font-medium rounded-lg hover:bg-neutral-800 transition-colors"
               >
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Chat with Us

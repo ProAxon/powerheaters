@@ -36,7 +36,7 @@ export default function ProductsPage() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url(/images/products-hero.jpg)',
-            backgroundColor: '#1a1a2e'
+            backgroundColor: '#2b2b2b'
           }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -118,7 +118,7 @@ export default function ProductsPage() {
                       className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                       style={{ 
                         backgroundImage: `url("${category.heroImage}")`,
-                        backgroundColor: '#1a1a2e'
+                        backgroundColor: '#2b2b2b'
                       }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
